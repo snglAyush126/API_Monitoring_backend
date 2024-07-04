@@ -6,8 +6,8 @@ from datetime import date
 from fastapi import FastAPI, Response
 
 from fastapi.middleware.cors import CORSMiddleware
-
-
+from fastapi import Query
+from fastapi import Header
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pymongo
@@ -44,7 +44,10 @@ def read_root():
     return {"Hello": "World"}
 
 @app.get("/usage/{month}/{year}")
-async def read_item(month: int, year:int, userToken: str | None = None):
+async def read_item(month: int, year:int, userToken: str = Query(
+        None,
+        description="User token for authentication purposes. Use userToken='976hgyfucuvbk' if not provided.",
+    )):
 
     myclient = pymongo.MongoClient("mongodb+srv://snglayush:Ayush123@cluster0.p5tsrwd.mongodb.net/API_MONITORING")
     mydb = myclient["mydatabase"]
@@ -65,7 +68,10 @@ async def read_item(month: int, year:int, userToken: str | None = None):
 
 
 @app.get("/download/{data_id}")
-async def read_item(data_id: str, userToken: str | None = None):
+async def read_item(data_id: str,userToken: str = Header(
+        None,
+        description="User token for authentication purposes. Use userToken='976hgyfucuvbk' if not provided.",
+    )):
 
   
     todays_date = date.today() 
@@ -82,7 +88,10 @@ async def read_item(data_id: str, userToken: str | None = None):
     return {"userToken":userToken}
 
 @app.get("/chat/{chat_id}")
-async def read_item(chat_id: int, userToken: str | None = None):
+async def read_item(chat_id: int, userToken: str = Header(
+        None,
+        description="User token for authentication purposes. Use userToken='976hgyfucuvbk' if not provided.",
+    )):
 
     myclient = pymongo.MongoClient("mongodb+srv://snglayush:Ayush123@cluster0.p5tsrwd.mongodb.net/API_MONITORING")
     mydb = myclient["mydatabase"]
