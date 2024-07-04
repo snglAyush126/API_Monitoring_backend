@@ -1,0 +1,31 @@
+# Python related
+__pycache__/
+*.pyc
+
+# Environment related
+.env
+
+# Dependency directories
+venv/
+env/
+env36/
+env37/
+env38/
+env39/
+env40/
+
+# IDE files
+.vscode/
+.idea/
+
+# Compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
